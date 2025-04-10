@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<title>Удаление статьи</title>
+<meta name="description" content="Статья блога"/>
+{% endblock %}
+
+{% block body %}
+<h1 class="text-center mt-3">Вы уверены, что хотите удалить статью "{{ post.title }}"?</h1>
+
+<form class="form__delete" action="{% url 'delete-post' post.pk %}" method="POST">
+    {% csrf_token %}
+    <input class="btn btn-primary col-6 btn-lg mt-3 mb-5" type="submit" value="Удалить">
+    <p><a class="btn btn-primary col-6 btn-lg " href="{% url 'single_article' post.pk %}">Отмена</a></p>
+</form>
+{% endblock %}

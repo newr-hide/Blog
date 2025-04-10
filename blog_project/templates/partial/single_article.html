@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<title>Статья</title>
+<meta name="description" content="Статья блога"/>
+{% endblock %}
+
+{% block body %}
+
+<h1 class="title text-center mt-3">{{ post.title }}</h1>
+<img class="img__article img-fluid mb-5" src="{{ post.image.url }}" alt="Изображение">
+<p class="content__article">{{ post.content }}</p>
+<p class="author__content">{{ post.author }}</p>
+<p><a class="btn btn-primary btn-lg" href="{% url 'update-post' post.pk %}">Редактировать пост</a></p>
+<p><a class="btn btn-primary btn-lg" href="{% url 'delete-post' post.pk %}" class="btn btn-danger">Удалить пост</a></p>
+<h3 class="title__comment">Комментарии:</h3>
+{% for comment in comments %}
+<div class="comment bg-light mb-3">
+    <p>{{ comment.text }}</p>
+    <div class="author__comment"><strong> {{ comment.author }}</strong></div>
+    <strong> {{ comment.date_created|date:"d.m.Y H:i:s" }}</strong>
+</div>
+{% empty %}
+<strong><p class="no__comment">Еще нет комментариев...</p></strong>
+{% endfor %}
+
+<h3 class="leave__comment">Оставьте комментарий</h3>
+<form class="form-control mb-5" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-primary btn-lg">Отправить</button>
+</form>
+{% endblock %}

@@ -1,0 +1,8 @@
+/myvenv
+/config.py
+/bin
+/obj
+*.pdb
+*.exe
+.idea
+data_base.py

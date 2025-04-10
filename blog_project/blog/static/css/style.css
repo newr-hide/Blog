@@ -1,0 +1,12 @@
+.navbar-brand {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav-link {
+    font-size: 22px;
+}
+
+.title::first-letter {
+    text-transform: uppercase;
+}

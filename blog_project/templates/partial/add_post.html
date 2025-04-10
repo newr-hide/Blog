@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<h1 class="text-center mt-3 mb-3">Добавить статью</h1>
+<form class="form__article mb-5" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-primary btn-lg" type="submit">Добавить</button>
+</form>
+{% endblock %}
