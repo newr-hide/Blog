@@ -9,7 +9,7 @@ class Post(models.Model):
     image = models.ImageField(upload_to='images/', blank=True, null=True)
     content = models.TextField()
     date_published = models.DateTimeField(default=timezone.now)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author =models.CharField(max_length=100, default="Anonymous")
     description = models.TextField(default='Описание')
 
     def __str__(self):

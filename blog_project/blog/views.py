@@ -1,4 +1,5 @@
 from django.core.paginator import Paginator
+from django.db import IntegrityError
 from django.shortcuts import render, redirect
 from blog.models import Post, Comment, User
 from .forms import PostForm, CommentForm
@@ -48,8 +49,24 @@ def add_post(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
-            new_post = form.save()
-            return redirect('home')
+            title = form.cleaned_data['title']
+            content = form.cleaned_data['content']
+            image = form.cleaned_data['image']
+            author = form.cleaned_data['author']
+
+            try:
+                user = User.objects.get(username=author)
+            except User.DoesNotExist:
+                user = User.objects.create_user(username=author, password=None)
+
+            post = Post.objects.create(
+                title=title,
+                content=content,
+                image=image,
+                author=user
+            )
+
+        return redirect('home')
     else:
         form = PostForm()
     return render(request, 'partial/add_post.html', {'form': form})

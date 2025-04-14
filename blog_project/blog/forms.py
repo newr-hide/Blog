@@ -3,7 +3,7 @@ from .models import Post, Comment, User
 
 
 class PostForm(forms.ModelForm):
-    author = forms.ModelChoiceField(queryset=User.objects.all())
+    author = forms.CharField(label="Имя пользователя")
     class Meta:
         model = Post
         fields = ['title', 'image', 'content', 'author']
@@ -16,7 +16,6 @@ class PostForm(forms.ModelForm):
         widgets = {
             'title': forms.TextInput(attrs={'placeholder': 'Название статьи', 'class': 'w-50'}),
             'content': forms.Textarea(attrs={'placeholder': 'Ваша статья...', 'class': 'w-100'}),
-            # 'image': forms.FileInput(attrs={'accept': 'image/*', 'class': 'form-control-file'}),
         }
 
 
