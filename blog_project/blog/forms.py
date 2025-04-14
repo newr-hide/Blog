@@ -1,8 +1,9 @@
 from django import forms
-from .models import Post, Comment
+from .models import Post, Comment, User
 
 
 class PostForm(forms.ModelForm):
+    author = forms.ModelChoiceField(queryset=User.objects.all())
     class Meta:
         model = Post
         fields = ['title', 'image', 'content', 'author']
@@ -15,7 +16,7 @@ class PostForm(forms.ModelForm):
         widgets = {
             'title': forms.TextInput(attrs={'placeholder': 'Название статьи', 'class': 'w-50'}),
             'content': forms.Textarea(attrs={'placeholder': 'Ваша статья...', 'class': 'w-100'}),
-            'author': forms.TextInput(attrs={'placeholder': 'Имя автора', 'class': 'w-50'})
+            # 'image': forms.FileInput(attrs={'accept': 'image/*', 'class': 'form-control-file'}),
         }
 
 

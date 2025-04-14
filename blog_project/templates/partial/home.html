@@ -25,7 +25,11 @@
             <br><br><br>
         </div>
         <div class="col-sm-5">
-            <img class="img-fluid" src="{{ elem.image.url }}" alt="Picture"></div>
+            {% if elem.image %}
+                <img class="img-fluid" src="{{ elem.image.url }}" alt="Picture">
+            {% else %}
+                <img class="img-fluid" src="{% static 'images/default-image.png' %}" alt="Placeholder">
+            {% endif %}
     </div>
 </div>
 {% endfor %}

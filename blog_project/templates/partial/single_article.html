@@ -9,7 +9,11 @@
 {% block body %}
 
 <h1 class="title text-center mt-3">{{ post.title }}</h1>
-<img class="img__article img-fluid mb-5" src="{{ post.image.url }}" alt="Изображение">
+{% if elem.image %}
+    <img class="img-fluid" src="{{ elem.image.url }}" alt="Picture">
+{% else %}
+    <img class="img-fluid" src="{% static 'images/default-image.png' %}" alt="Placeholder">
+{% endif %}
 <p class="content__article">{{ post.content }}</p>
 <p class="author__content">{{ post.author }}</p>
 <p><a class="btn btn-primary btn-lg" href="{% url 'update-post' post.pk %}">Редактировать пост</a></p>
